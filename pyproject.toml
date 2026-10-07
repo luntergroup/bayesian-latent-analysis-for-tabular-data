@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blat"
+version = "1.0.0"
+description = "Bayesian Latent Analysis of Tabular data: a standalone tool"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "scipy>=1.11", "pandas>=2.0", "numba>=0.60",
+                "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+# The notebooks; t-SNE for Fig 3b comes from scikit-learn.
+figures = ["matplotlib>=3.8", "scikit-learn>=1.4", "jupyter", "nbconvert", "ipykernel"]
+test = ["pytest>=7.0"]
+
+[project.scripts]
+blat = "blat.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["blat*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: long-running end-to-end runs"]
